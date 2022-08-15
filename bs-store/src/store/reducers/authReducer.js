@@ -17,7 +17,7 @@ function authReducer(state={}, { type, payload }) {
           isLogin:true
         }
       };
-
+   
     default:
       return { ...state };
   }

@@ -5,28 +5,28 @@ import {
 import { cartItems } from "../initialValues/cartItems";
 
 const initialState = {
-    cartItems:cartItems
+    cartItems: cartItems
 };
 export default function cartReducer(state = initialState, { type, payload }) {
     switch (type) {
         case ADD_TO_CART:
-            let book = state.cartItems.find(c=>c.id===payload.id)
+            let book = state.cartItems.find(c => c.id === payload.id)
             if (book) {
                 book.quantity++;
                 return {
                     ...state,
-                }                    
+                }
             } else {
-                return{
+                return {
                     ...state,
-                    cartItems: [...state.cartItems, {quantity:1,book:payload}], 
-                }                   
+                    cartItems: [...state.cartItems, { quantity: 1, book: payload }],
+                }
             }
-          case REMOVE_FROM_CART:
-           return{
-               ...state,
-       cartItems: state.cartItems.filter((c) =>c.book.id !== payload.id),
-     };
+        case REMOVE_FROM_CART:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter((c) => c.book.id !== payload.id),
+            };
         default:
             return { ...state };
     }

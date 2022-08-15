@@ -13,10 +13,19 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 import {  ButtonGroup} from "@mui/material";
+import { removeFromCart } from '../../store/actions/cartActions';
 
 const Cart = () => {
+    const cartDispatch = useDispatch();
     const {cartItems} = useSelector((state) => state.cart)
     let total = 0
+
+    const handleCartItemDelete=(book)=>{
+        cartDispatch(removeFromCart(book))
+        console.log(book)
+        console.log(cartItems)
+    }
+
   return (
     <TableContainer  sx={{ m: 1, p: 1 }} component={Paper}>
         <Table>
@@ -41,12 +50,12 @@ const Cart = () => {
                     <Avatar src={`/books/${(index+1) % 121}.jpg`}></Avatar>
                   </TableCell>
                   <TableCell align='center'>{title}</TableCell>
-                  <TableCell align='center'>{price}</TableCell>
+                  <TableCell align='center'>{price} ₺</TableCell>
                   <TableCell align='center'>{publisher}</TableCell>
                   <TableCell>
                     <ButtonGroup orientation='vertical'>
-                      <Button>
-                        Sepetten sil
+                      <Button onClick={(e) =>handleCartItemDelete(book)}>
+                        REMOVE FROM CART
                       </Button>
                     </ButtonGroup>
                   </TableCell>
@@ -54,7 +63,8 @@ const Cart = () => {
               );
             })}
             <TableRow>
-                <TableCell align='center'>{total}</TableCell>
+                <TableCell colSpan={3} align='left'>Toplam </TableCell>
+                <TableCell sx={{paddingLeft:'60px'}} colSpan={3} align='left'>{total} ₺</TableCell>
             </TableRow>
           </TableBody>
         </Table>

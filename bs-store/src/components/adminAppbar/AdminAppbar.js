@@ -56,12 +56,20 @@ const AdminAppbar = () => {
   };
 
  
+const logOut=(e)=>{
+e.preventDefault()
+  localStorage.removeItem("userId");
+  localStorage.removeItem("firstName");
+  localStorage.removeItem("lastName");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("accessToken");
+  navigate("/")
+}
 
-
-  const loginAndLogoutButton = authItems?.isLogin ? (
+  const loginAndLogoutButton = localStorage.getItem('accessToken')? (
     <Button
       key='login'
-      onClick={() => navigate("/")}
+      onClick={(e) => logOut(e)}
       sx={{ my: 2, color: "white", display: "block" }}
     >
       Logout

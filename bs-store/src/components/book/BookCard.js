@@ -76,7 +76,7 @@ export default function BookCard({ book }) {
         }
         )}
         <Typography >
-          {book.price}
+          {book.price} ₺
         </Typography>
 
       </CardContent>
