@@ -1,4 +1,5 @@
 import axios from "axios";
+import {authHeader} from "./AuthHeader";
 
 class BookService{
     constructor(){
@@ -14,18 +15,18 @@ class BookService{
         return await axios.get(url).then(resp => resp.data);
     }
 
-    async postOneBook(payload){
-        return await axios.post(this.baseUrl,payload).then(resp => resp.data);
+    async postOneBook(payload ){
+        return await axios.post(this.baseUrl,payload,authHeader).then(resp => resp.data);
     }
 
     async putOneBook(id,payload){
         const url = `${this.baseUrl}/${id}`;
-        return await axios.put(url,payload).then(resp => resp.data);
+        return await axios.put(url,payload,authHeader).then(resp => resp.data);
     }
 
     async deleteOneBook(id){
         const url = `${this.baseUrl}/${id}`;
-        await axios.delete(url).then(resp => resp);
+        await axios.delete(url,authHeader).then(resp => resp);
     }
 }
 

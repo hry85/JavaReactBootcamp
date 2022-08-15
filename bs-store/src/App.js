@@ -22,6 +22,7 @@ import AddBook from "./adminpages/books/AddBook";
 import Login from "./pages/login/Login";
 import BookList from "./pages/book/BookList";
 import BookCard from "./components/book/BookCard";
+import Cart from "./pages/Cart/Cart";
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
 
         <Route path="/books" element={<BookList />} />
+        <Route path="/cart" element={<Cart />} />
 
         <Route path='/' element={<Home />} />
 

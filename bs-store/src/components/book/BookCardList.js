@@ -8,20 +8,18 @@ import { addToCart } from "../../store/actions/cartActions";
 
 export default function BookCardList() {
   const { books } = useSelector((state) => state.book);
-  
-
-  const bookDispatch = useDispatch();
-  
+  const bookDispatch = useDispatch();  
   useEffect(() => {
     bookDispatch(getAllBooks()); 
   }, []);
 
+  
   return (
     <div>
-      <Grid sx={{mt:3}} container spacing={3}>
+      <Grid sx={{mt:3}} container spacing={2}>
         {books?.map((book) => (
-          <Grid spacing={3} item xs={6} md={4} lg={3}>
-            <BookCard key={book.id} book={book} />
+          <Grid item xs={6} md={4} lg={3} key={book.id} > 
+            <BookCard book={book} />
           </Grid>
         ))}
       </Grid>

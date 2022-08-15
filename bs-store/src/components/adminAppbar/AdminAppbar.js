@@ -25,12 +25,13 @@ const paths = [
   "/admin/books/list",
   "/admin/categories/list",
   "/admin/authors/list",
- 
+
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const AdminAppbar = () => {
   const { authItems } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -43,6 +44,8 @@ const AdminAppbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+ 
+
   const handleCloseNavMenu = (index) => {
     setAnchorElNav(null);
     navigate(paths[index]);
@@ -51,6 +54,9 @@ const AdminAppbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+ 
+
 
   const loginAndLogoutButton = authItems?.isLogin ? (
     <Button
@@ -76,7 +82,7 @@ const AdminAppbar = () => {
       top: 13,
       border: `2px solid ${theme.palette.background.paper}`,
       padding: '0 4px',
-     
+
     },
   }));
 
@@ -84,7 +90,7 @@ const AdminAppbar = () => {
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-        <MenuBookIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <MenuBookIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant='h6'
             noWrap
@@ -203,24 +209,22 @@ const AdminAppbar = () => {
             </Box>
           )}
 
-<IconButton >
-     <FavoriteBorderOutlinedIcon sx={{color:"white"}}/>
-     </IconButton>
-     <IconButton>
-        <ShoppingCartOutlinedIcon 
-        sx={{color:"white"}}
-        />  
-      </IconButton>
-    
+          <IconButton >
+            <FavoriteBorderOutlinedIcon sx={{ color: "white" }} />
+          </IconButton>
 
+          <IconButton onClick={() =>navigate("/cart")}>
+              <Badge badgeContent={cartItems.length} color="primary">
+                <ShoppingCartOutlinedIcon
+                  sx={{ color: "white" }}
+                />
+              </Badge>
+          </IconButton>
           <ThemeMenu />
-
-         
-
           <div>{loginAndLogoutButton}</div>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 };
 export default AdminAppbar;

@@ -27,6 +27,7 @@ import { postOneBook } from "../../store/actions/bookActions";
 import { showSnackbar } from "../../store/actions/settingActions";
 import SimpleFab from "../../components/fab/SimpleFab";
 import Paper from "@mui/material/Paper";
+import authHeader from "../../services/AuthHeader";
 
 
 
@@ -52,31 +53,31 @@ export default function AddBook() {
         price: 0,
         publisher: "",
       },
-      onSubmit: async (values) => {
-        console.log(values);
-        bookDispatch(postOneBook(values));
-        bookDispatch(showSnackbar({
-            message:"Book has been added.",
-            severity:"success"
-        }));
-        navigate("/admin/books/list");
-      },
+onSubmit: async (values) => {
+  console.log(values);
+  bookDispatch(postOneBook(values));
+  bookDispatch(showSnackbar({
+    message: "Book has been added.",
+    severity: "success"
+  }));
+  navigate("/admin/books/list");
+},
     });
 
-  useEffect(() => {
-    authorService.getAllAuthors().then((resp) => setAuthors(resp.data));
-    categoryService.getAllCategories().then((resp) => setCategories(resp.data));
-  }, []);
+useEffect(() => {
+  authorService.getAllAuthors().then((resp) => setAuthors(resp.data));
+  categoryService.getAllCategories().then((resp) => setCategories(resp.data));
+}, []);
 
-  return (
+return (
 
-    <form onSubmit={handleSubmit}>
-      <TableContainer  sx={{ m:10, p:1 }} maxWidth='sm' component={Paper}>
-      <Box sx={{ m:2}}>
+  <form onSubmit={handleSubmit}>
+    <TableContainer sx={{ m: 10, p: 1 }} maxwidth='sm' component={Paper}>
+      <Box sx={{ m: 2 }}>
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <Stack direction='column' spacing={2}>
-           
+
               <FormControl>
                 <FormLabel id='categories'>Categories</FormLabel>
                 <RadioGroup
@@ -119,9 +120,9 @@ export default function AddBook() {
           <Grid item xs={9}>
             <Stack direction='column' spacing={2}>
               <FormControl fullWidth>
-              <Typography align='center' gutterBottom variant='h5'>
-          Add Book
-        </Typography>
+                <Typography align='center' gutterBottom variant='h5'>
+                  Add Book
+                </Typography>
                 <TextField
                   name='title'
                   required
@@ -169,7 +170,7 @@ export default function AddBook() {
                 <Button variant='contained' type='submit'>
                   Add
                 </Button>
-                
+
               </ButtonGroup>
             </Stack>
           </Grid>
@@ -177,8 +178,8 @@ export default function AddBook() {
         <SimpleFab url="/admin/books/list" />
       </Box>
     </TableContainer>
-    </form>
-    
- 
-  );
+  </form>
+
+
+);
 }

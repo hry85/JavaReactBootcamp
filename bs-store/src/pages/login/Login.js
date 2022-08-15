@@ -69,7 +69,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Container sx={{ mt: 20  }} maxWidth='sm' maxHeight='sm' component={Paper}>
+      <Container sx={{ mt: 20  }} maxWidth='sm' component={Paper}>
         <Stack spacing={3}>
       
          <>

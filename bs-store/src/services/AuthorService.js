@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authHeader } from "./AuthHeader";
 
 class AuthorService {
   constructor() {
@@ -22,21 +23,21 @@ class AuthorService {
 
   async postOneAuthor(payload) {
     return await axios
-      .post(this.baseUrl, payload)
+      .post(this.baseUrl, payload,authHeader)
       .then((resp) => resp.data)
       .catch((err) => console.log(err));
   }
 
   async putOneAuthor(id, author) {
     return await axios
-      .put(id, author)
+      .put(id, author,authHeader)
       .then((resp) => resp.data)
       .catch((err) => console.log(err));
   }
 
   async deleteOneAuthor(id) {
     return await axios
-      .delete(id)
+      .delete(id,authHeader)
       .then((resp) => resp)
       .catch((err) => console.log(err));
   }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authHeader } from "./AuthHeader";
 
 class CategoryService {
   constructor() {
@@ -16,23 +17,19 @@ class CategoryService {
 
   async deleteOneCategory(id) {
     const url = `${this.baseUrl}/${id}`;
-    return await axios.delete(url,{
-      headers:{
-        'Authorization': localStorage?.getItem('accessToken')
-      }
-    })
+    return await axios.delete(url,authHeader)
     .then((resp) => resp)
     .catch(err => err.response.status);
   }
 
   async postOneCategory(category) {
-    return await axios.post(this.baseUrl, category).then((resp) => resp.data);
+    return await axios.post(this.baseUrl, category,authHeader).then((resp) => resp.data);
   }
 
   async putOneCategory(id,category){
     const url = `${this.baseUrl}/${id}`;
     console.log(url)
-    return await axios.put(url,category).then(resp => resp.data);
+    return await axios.put(url,category,authHeader).then(resp => resp.data);
   }
 
   

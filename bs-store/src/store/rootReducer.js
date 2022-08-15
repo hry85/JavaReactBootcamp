@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     book : bookReducer,
     author : authorReducer,
     auth : authReducer,
-   // cart : cartReducer,
+    cart : cartReducer
 
 });
 

@@ -14,8 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useEffect } from "react";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
 
 const ExpandMore = styled((props) => {
@@ -29,26 +28,27 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function BookCard({book}) {
+export default function BookCard({ book }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-//  const{carts} = useSelector((state) => state.carts);
-
-//  const cartDispatch = useDispatch();
-//  useEffect(() => {
-//  cartDispatch(addToCart());
-//  }, []);
  
+
+  const cartDispatch = useDispatch();
+
+  const addToCartItem = (book) => {
+    cartDispatch(addToCart(book));
+  }
+  
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: indigo[500] }} aria-label="recipe">
-            {book.title.substring(0,1)}
+            {book.title.substring(0, 1)}
           </Avatar>
         }
         action={
@@ -58,34 +58,34 @@ export default function BookCard({book}) {
         }
         title={book.title}
         subheader={book.publisher}
-        sx={{minHeight: 80}}
+        sx={{ minHeight: 80 }}
       />
       <CardMedia
         component="img"
         height="194"
-        image={`/books/${book.id%120}.jpg`}
+        image={`/books/${book.id % 120}.jpg`}
         alt="Paella dish"
       />
-      <CardContent  sx={{minHeight: 150}}>
-        {book.bookAuthors.map((authors) =>{
+      <CardContent sx={{ minHeight: 150 }}>
+        {book.bookAuthors.map((authors) => {
           return (
-             <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary" key={authors.id}>
               {authors.firstName} {authors.lastName}
-        </Typography>
+            </Typography>
           );
         }
         )}
         <Typography >
-           {book.price}
-          </Typography>
+          {book.price}
+        </Typography>
+
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton  aria-label="add to shopping basket">
-
-            <AddShoppingCartIcon/> {/*onClick={()=>this.addToCart(book)}  */}
+        <IconButton aria-label="add to shopping basket" onClick={() => addToCartItem(book)}>
+          <AddShoppingCartIcon  />
         </IconButton>
         <ExpandMore
           expand={expanded}
@@ -100,9 +100,9 @@ export default function BookCard({book}) {
         <CardContent>
           <Typography paragraph>{book.category.categoryName}</Typography>
           <Typography paragraph>
-           {book.category.description}
+            {book.category.description}
           </Typography>
-         
+
         </CardContent>
       </Collapse>
     </Card>
