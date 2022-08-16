@@ -32,6 +32,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 const AdminAppbar = () => {
   const { authItems } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
+  const { favorites } = useSelector((state) => state.favorite);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -217,8 +218,10 @@ e.preventDefault()
             </Box>
           )}
 
-          <IconButton >
+          <IconButton onClick={() =>navigate("/favorite")}>
+            <Badge badgeContent={favorites.length} color='primary'>
             <FavoriteBorderOutlinedIcon sx={{ color: "white" }} />
+            </Badge>
           </IconButton>
 
           <IconButton onClick={() =>navigate("/cart")}>

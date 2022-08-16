@@ -31,8 +31,8 @@ const Cart = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align='center'>Id</TableCell>
-              <TableCell align='center' >Image</TableCell>
+              <TableCell align='left'>Id</TableCell>
+              <TableCell align='left' >Image</TableCell>
               <TableCell align='center'>Title</TableCell>
               <TableCell align='center'>Price</TableCell>
               <TableCell align='center'>Publisher</TableCell>
@@ -41,13 +41,13 @@ const Cart = () => {
           </TableHead>
           <TableBody>
             {cartItems.map(({book},index) => {
-              const {  title, price, publisher } = book;
+              const {  id,title, price, publisher } = book;
               total+=price
               return (
-                <TableRow key={index}>
+                <TableRow key={id}>
                   <TableCell component='th' scope='row'>{index+1}</TableCell>
                   <TableCell align='center' >
-                    <Avatar src={`/books/${(index+1) % 121}.jpg`}></Avatar>
+                    <Avatar src={`/books/${id % 121}.jpg`}></Avatar>
                   </TableCell>
                   <TableCell align='center'>{title}</TableCell>
                   <TableCell align='center'>{price} ₺</TableCell>

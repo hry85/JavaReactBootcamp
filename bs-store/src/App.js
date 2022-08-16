@@ -21,8 +21,8 @@ import UpdateCategory from "./adminpages/categories/UpdateCategory";
 import AddBook from "./adminpages/books/AddBook";
 import Login from "./pages/login/Login";
 import BookList from "./pages/book/BookList";
-import BookCard from "./components/book/BookCard";
 import Cart from "./pages/Cart/Cart";
+import Favorite from "./pages/favorite/Favorite";
 
 
 function App() {
@@ -63,10 +63,12 @@ function App() {
 
         <Route path="/books" element={<BookList />} />
         <Route path="/cart" element={<Cart />} />
+       <Route path="/favorite" element={<Favorite />} /> 
+
 
         <Route path='/' element={<Home />} />
 
-        {/* <Route path='/cart' element={<BookCard />} /> */}
+    
       </Routes>
 
       <SimpleSnackbar snackbar={snackbar} />

@@ -9,13 +9,14 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { indigo, red } from '@mui/material/colors';
+import { indigo} from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../store/actions/cartActions";
+import { addToFavorites } from "../../store/actions/favoriteActions";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -41,6 +42,11 @@ export default function BookCard({ book }) {
 
   const addToCartItem = (book) => {
     cartDispatch(addToCart(book));
+  }
+
+  const favoriteDispatch=useDispatch();
+  const addToFavorite=(book)=>{
+    favoriteDispatch(addToFavorites(book));
   }
   
   return (
@@ -81,7 +87,7 @@ export default function BookCard({ book }) {
 
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={()=> addToFavorite(book)}>
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="add to shopping basket" onClick={() => addToCartItem(book)}>
